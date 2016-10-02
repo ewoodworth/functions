@@ -1,79 +1,91 @@
-# PART ONE
-
-# 1. We have some code which is meant to calculate an item cost
-#    by adding tax. Tax is normally 5% but it's higher in
-#    California (7%).
-
-#    Turn this into a function. Your function will pass in
-#    the default tax amount (5%), a state abbreviation, and the
-#    cost amount as parameters.
-
-#    If the state is California, apply a 7% tax within the function.
-#    Your function should return the total cost of the item,
-#    including tax.
-
-#    If the user does not provide a tax rate it should default to 5% 
+#TO DO LIST: Cheat sheet for SublimeText keyboard shortcuts (beginning of line)
 
 #Declare global sales tax of 5%
 tax = 0.05
-
-def calculate_total_cost(cost, tax):
-purchase_origin = raw_input("Type the postal abreviation for the state in which this is being purchased.")
+#assume function takes input from prior survey to get properly formatted state abbreviation , cost of item. Assume it's up to me to adjust national tax for local variation.
+def calculate_total_cost(cost, state, tax = tax):
+    """From the on-shelf cost of an item and local tax rate, return total cost including sales tax.
+    """
+    #In case of typos
+    state.lower()
+    if state == 'ca':
+        tax = 0.07
     total_cost = cost * (tax+1)
-return total_cost
+    return total_cost
 
 #####################################################################
-# PART TWO
-
-# 1. (a) Write a function, `is_berry()`, which takes a fruit name as a string
-#        and returns a boolean if the fruit is a "strawberry", "cherry", or 
-#        "blackberry".
-
 def is_berry(fruit):
-    #sets are for searching and we may want to add more berries later but we're just checking for belonging.
+    """Takes in a string and returns a boolean
+    Tests fruit to determine if it is a berry.
+    """
+    fruit.lower()
+#sets are for searching and we may want to add more berries later. Sorting is irrelevant for this use.
     berries = {'strawberry', 'cherry', 'blueberry'}
     if fruit in berries:
         return True
-#Pretty sure this next part is redundant, but just in case...
-    else:
-        return False
+#Asked someone whether I really needed an "else:" here and was told that failing if will return None and None and False are equivalent. Are they really the same or just often treated (by code) the same?
 
-#    (b) Write another function, shipping_cost(), which calculates shipping cost
-#        by taking a fruit name as a string, calling the `is_berry()` function 
-#        within the `shipping_cost()` function and returns `0` if ``is_berry()
-#        == True``, and `5` if ``is_berry() == False``.
+#TO DO LIST: HB Email Filter/Folder
 
 def shipping_cost(fruit):
+    """Takes a string, and returns an integer
+    Returns the shipping cost for a fruit, on the basis of whether or not it is a berry
+    """
     if is_berry(fruit):
         return 0
     else:
         return 5
 
-# 2. (a) Write a function, `is_hometown()`, which takes a town name as a string
-#        and evaluates to `True` if it is your hometown, and `False` otherwise.
-#
-#    (b) Write a function, `full_name()`, which takes a first and last name as
-#        arguments as strings and returns the concatenation of the two names in
-#        one string.
-#
-#    (c) Write a function, `hometown_greeting()`, which takes a home town, a
-#        first name, and a last name as strings as arguments, calls both
-#        `is_hometown()` and `full_name()` and prints "Hi, 'full name here',
-#        we're from the same place!", or "Hi 'full name here', where are you 
-#        from?" depending on what `is_hometown()` evaluates to.
+def is_hometown(town):
+    """Takes a string and returns Boolean
+    Tests user's hometown to see if it's the same as the programmer's
+    """
+    town.lower
+    if town == 'malibu':
+        return True
 
+def full_name(first_name, last_name):
+    """Takes two strings and returns one string
+    Takes first and last names and concatenates them to make the user's full name
+    """
+    #Clould also use .format, but seems like overkill here
+    full_name = first_name + " " + last_name
+    return full_name
+
+def hometown_greeting (town, first_name, last_name):
+    """Takes three strings and returns nothing
+    Prints a greeting statement incorporating the user's name and hometown
+    """
+    home_town = home_town(town) #True or False
+    name = full_name(first_name, last_name)
+    if home_town:
+        print "Hi, {}, we're from the same place!".format(name)
+    else:
+        print "Hi, {}, where are you from?".format(name)
+        #Except, that we know where they're from, because they told us.
+
+        ##TO DO LIST: Fluency in %s notation
 #####################################################################
+def increment(x=1):
+    """Takes two numbers and returns one number
+    Outer function increment() takes a single number (default is 1. Inner function add() takes a single number which it adds to the parameter from the outer function.
+    """
+    def add(y):
+        return x+y
+    return add
 
-# PART THREE
-
-# 1. Write a function ``increment()`` with a nested inner function, ``add()`` 
-#    inside of it. The outer function should take ``x``, an integer which
-#    defaults to 1. The inner function should take ``y`` and add ``x`` and ``y`` together.
-
-# 2. Call the function ``increment()`` with x = 5. Assign what is returned to a variable name, addfive. Call 
-#    addfive with y = 5. Call again with y = 20.
+addfive = increment(5)(5)
+addfive = increment(5)(20)
 
 # 3. Make a function that takes in a number and a list of numbers. It should append
 #    the number to the list of numbers and return the list.
+
+def append_input_to_list(number_list, new_num):
+    """Takes a list of numbers and a number, and returns a list
+    Appends new_num to number_list
+    """
+    number_list.append(new_num)
+    return number_list
+
 
 #####################################################################
