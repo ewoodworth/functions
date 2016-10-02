@@ -14,6 +14,14 @@
 
 #    If the user does not provide a tax rate it should default to 5% 
 
+#Declare global sales tax of 5%
+tax = 0.05
+
+def calculate_total_cost(cost, tax):
+purchase_origin = raw_input("Type the postal abreviation for the state in which this is being purchased.")
+    total_cost = cost * (tax+1)
+return total_cost
+
 #####################################################################
 # PART TWO
 
@@ -21,10 +29,25 @@
 #        and returns a boolean if the fruit is a "strawberry", "cherry", or 
 #        "blackberry".
 
+def is_berry(fruit):
+    #sets are for searching and we may want to add more berries later but we're just checking for belonging.
+    berries = {'strawberry', 'cherry', 'blueberry'}
+    if fruit in berries:
+        return True
+#Pretty sure this next part is redundant, but just in case...
+    else:
+        return False
+
 #    (b) Write another function, shipping_cost(), which calculates shipping cost
 #        by taking a fruit name as a string, calling the `is_berry()` function 
 #        within the `shipping_cost()` function and returns `0` if ``is_berry()
 #        == True``, and `5` if ``is_berry() == False``.
+
+def shipping_cost(fruit):
+    if is_berry(fruit):
+        return 0
+    else:
+        return 5
 
 # 2. (a) Write a function, `is_hometown()`, which takes a town name as a string
 #        and evaluates to `True` if it is your hometown, and `False` otherwise.
